@@ -1,0 +1,96 @@
+.handler-signup {
+	/* min-width: 50%;
+	max-width: 80%; */
+	min-width: 35rem;
+	max-width: 50rem;
+	margin: 0 auto;
+}
+
+.new-handler {
+	max-height: 100vh;
+	text-align: center;
+	margin-top: 9rem;
+	width: 98.6%;
+}
+
+.profile {
+	@include display-flex(row);
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.profile-img {
+	@include display-flex(row);
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.preview-img {
+	max-width: 15rem;
+	min-width: 10rem;
+	height: 20vh;
+	background: center / contain no-repeat url(/img/avatars/images.jfif);
+	border-radius: 3rem;
+	margin: 0 0 0 2rem;
+}
+
+#btn-pics {
+	padding: 0.7rem;
+	background-color: #e5ebe9;
+	border-radius: 10rem;
+	border: 0;
+	cursor: pointer;
+	right: 0;
+
+	&:hover {
+		background-color: #aeb3b2;
+	}
+
+	i {
+		font-size: 1.7rem;
+		color: rgb(70, 67, 67);
+	}
+}
+
+.selected-img {
+	width: 100%;
+	border-radius: 2rem;
+}
+
+.handler-info {
+	@include display-flex(column);
+	justify-content: center;
+	align-items: flex-start;
+	min-width: 20rem;
+	max-width: 70vw;
+}
+
+.handler-info,
+.handler-address {
+	input,
+	select {
+		font-size: 1.8rem;
+		line-height: 3rem;
+		width: 100%;
+		margin: 0 2rem 1rem 2rem;
+		background-color: rgb(245, 243, 243);
+		border: 0;
+		border-radius: 1rem;
+		padding-left: 1rem;
+
+		&:hover,
+		&:focus {
+			background-color: #fff;
+			border: 2px solid $primary-color;
+			outline: none;
+		}
+	}
+
+	select {
+		appearance: none;
+	}
+
+	option:checked {
+		background-color: rgb(245, 243, 243);
+	}
+}

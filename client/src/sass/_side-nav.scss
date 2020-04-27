@@ -1,0 +1,37 @@
+.side-nav {
+  position: fixed;
+  top: 50%;
+
+  ul {
+    @include display-flex(row);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  li {
+    padding: 1rem 0.2rem 1rem 1rem;
+    margin: 3rem 0 0 0;
+    border-radius: 20px;
+    box-shadow: 1rem 1rem 1rem 0 rgba(0, 0, 0, 0.6);
+    display: none;
+    @include set-bg-color($primary-color);
+  }
+
+  a {
+    text-decoration: none;
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    color: $secondary-color;
+  }
+
+  li:hover {
+    @include set-bg-color($secondary-color);
+    a {
+      color: $primary-color;
+    }
+  }
+
+  .show-nav {
+    display: inline-block;
+  }
+}

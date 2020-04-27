@@ -1,0 +1,31 @@
+$primary-color: #f2f2f2;
+$secondary-color: #591e08;
+$blue: #0713f2;
+$red: #f20505;
+$orange: #f29f05;
+$green: #026726;
+
+@mixin display-flex($direction) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+}
+
+@mixin transition-ease {
+  transition: all 0.5s ease-in-out;
+}
+
+//  Set text color base on bg
+@function set-text-color($color) {
+  @if (lightness($color) > 75) {
+    @return #333;
+  } @else {
+    @return #f2f2f2;
+  }
+}
+
+// Set background-color and textcolor
+@mixin set-bg-color($color) {
+  background-color: $color;
+  color: set-text-color($color);
+}

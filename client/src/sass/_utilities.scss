@@ -1,0 +1,38 @@
+/* **************************
+          Headers
+*****************************/
+%header {
+	font-family: 'Roboto', 'Helvetica Neue', helvetica, sans-serif;
+	font-weight: 300;
+	color: lighten($secondary-color, 20);
+}
+
+.header-2 {
+	@extend %header;
+	font-size: 3rem;
+	margin: 1.5rem 0 1.5rem 0;
+}
+
+.header-3 {
+	@extend %header;
+	font-size: 2rem;
+	text-transform: capitalize;
+}
+
+/* **************************
+          Descriptions
+*****************************/
+
+.title-span,
+dt {
+	font-size: 1.8rem;
+	font-weight: 600;
+	text-transform: capitalize;
+}
+
+p,
+dd {
+	font-size: 1.7rem;
+	letter-spacing: 0.2rem;
+	text-transform: capitalize;
+}
