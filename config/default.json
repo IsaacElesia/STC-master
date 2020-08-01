@@ -1,4 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://isaac:Impaco.19@stc-r0ors.mongodb.net/test?retryWrites=true&w=majority",
-  "jwtSecret": "Print#1457EveryTime."
-}

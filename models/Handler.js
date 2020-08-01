@@ -60,6 +60,4 @@ const HandlerSchema = new mongoose.Schema({
 	},
 });
 
-const Handler = mongoose.model('handler', HandlerSchema);
-
-module.exports = Handler;
+module.exports = mongoose.model('handler', HandlerSchema);

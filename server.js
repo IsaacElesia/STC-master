@@ -1,5 +1,10 @@
+require('dotenv').config();
+const { PORT, NODE_ENV } = require('./config/default');
 const express = require('express');
 const connectDB = require('./config/db');
+const errorHandler = require('./middleware/errorHandler');
+const ShopifyOreders = require('./shopify/orders/shopifyOrders');
+const ShopifyProducts = require('./shopify/items/shopifyItems');
 
 const app = express();
 
@@ -30,6 +35,17 @@ app.use('/api/order', require('./routes/api/orders'));
 app.use('/api/item', require('./routes/api/items'));
 app.use('/api/posts', require('./routes/api/posts'));
 
-const PORT = process.env.PORT || 6000;
+//Get orders from shopify
+//setInterval(ShopifyOreders.OpenOders, 60000);
 
-app.listen(PORT, () => console.log(`Serever started on port ${PORT}`));
+//ShopifyProducts.GetItemsAndUpdateDB();
+//ShopifyOreders.GetOrdersAndUpdateDB();
+
+//ShopifyProducts.GetAll();
+
+//Error Handler Middleware
+app.use(errorHandler);
+
+app.listen(PORT, () =>
+	console.log(`Serever in ${NODE_ENV}, started on port ${PORT}`)
+);

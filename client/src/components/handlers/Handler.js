@@ -36,8 +36,12 @@ const Handler = ({
 					</div>
 					<div class='handler-details'>
 						<img
-							src='/img/handlers/a419485d-7106-41a8-857b-6d45906c71f7.jpg'
-							alt=''
+							src={
+								profile.avatar
+									? profile.avatar.avatarLocation
+									: '/img/avatars/images.jfif'
+							}
+							alt={profile && profile.name}
 						/>
 
 						<h3 class='header-3'>Hi, {profile && profile.name}</h3>
@@ -89,7 +93,7 @@ const Handler = ({
 						) : (
 							<Fragment>
 								<p>You haven't added your info yet. Please add your info.</p>
-								<Link to='/home/newhandler' className='btn-new'>
+								<Link to='/home/edithandler' className='btn-new'>
 									{' '}
 									Add info
 								</Link>

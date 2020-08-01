@@ -37,8 +37,12 @@ const Handlers = ({ profile: { profiles, loading }, getProfiles }) => {
 										<div className='card-details'>
 											<img
 												className='handler-img'
-												src='/img/products/2bf6e0cd-36d2-4a2d-87d4-ff76c50daf8f.jpg'
-												alt=''
+												src={
+													profile.avatar
+														? profile.avatar.avatarLocation
+														: '/img/avatars/images.jfif'
+												}
+												alt={profile.name}
 											/>
 											<h3 className='header-3'>{profile.name}</h3>
 											<p>

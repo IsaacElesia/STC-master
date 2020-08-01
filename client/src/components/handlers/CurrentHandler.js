@@ -25,24 +25,29 @@ const CurrentHandler = ({
 			</div>
 			<div class='handler-details'>
 				<img
-					src='/img/handlers/a419485d-7106-41a8-857b-6d45906c71f7.jpg'
-					alt=''
+					src={
+						handler.avatar
+							? handler.avatar.avatarLocation
+							: '/img/avatars/images.jfif'
+					}
+					alt={handler && handler.name}
 				/>
 
 				<h3 class='header-3'>Hi, {handler && handler.name}</h3>
-				{profile !== null ? (
+				{handler !== null ? (
 					<Fragment>
 						<p>
-							<span className='title-span'>ID:</span> e34-77885-yu8
+							<span className='title-span'>ID:</span> {handler._id}
 						</p>
 						<p>
-							<span className='title-span'>Role:</span> Tailor
+							<span className='title-span'>Role:</span> {handler.role}
 						</p>
 						<p>
-							<span className='title-span'>Tel:</span> 214-582-7677
+							<span className='title-span'>Tel:</span>
+							{handler.phone}
 						</p>
 						<p>
-							<span className='title-span'>Email:</span> lizy@yahoo.com
+							<span className='title-span'>Email:</span> {handler.email}
 						</p>
 
 						<table className='address'>
@@ -55,8 +60,8 @@ const CurrentHandler = ({
 							</thead>
 							<tbody>
 								<tr>
-									<td colSpan='2'>230 Kinzy Dr</td>
-									<td>Suite 12</td>
+									<td colSpan='2'>{handler.address.street}</td>
+									<td>{handler.address.apt}</td>
 								</tr>
 							</tbody>
 							<thead>
@@ -68,9 +73,9 @@ const CurrentHandler = ({
 							</thead>
 							<tbody>
 								<tr>
-									<td>Huston</td>
-									<td>Texas</td>
-									<td>78004</td>
+									<td>{handler.address.city}</td>
+									<td>{handler.address.state}</td>
+									<td>{handler.address.zip}</td>
 								</tr>
 							</tbody>
 						</table>
