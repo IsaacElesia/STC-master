@@ -11,6 +11,7 @@ export const login = (email, password) => async (dispatch) => {
 			'Content-Type': 'application/json',
 		},
 	};
+
 	email = email.toLowerCase();
 	const body = JSON.stringify({ email, password });
 

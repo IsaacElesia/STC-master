@@ -1,23 +1,13 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import Spinner from '../../layout/Spinner';
 import { Link } from 'react-router-dom';
-import { getCurrentProfile } from '../../actions/profile';
-import Spinner from '../layout/Spinner';
 
-const CurrentHandler = ({
-	getCurrentProfile,
-	auth: { handler },
-	profile: { profile, loading },
-}) => {
-	useEffect(() => {
-		getCurrentProfile();
-	}, [getCurrentProfile]);
-
-	return loading && profile === null ? (
+const RenderCurrentHandler = ({ loading, currentProfile, handler }) => {
+	return loading && currentProfile === null ? (
 		<Spinner />
 	) : (
-		<section class='handler scrollbar'>
+		<section className='handler scrollbar'>
 			<div className='edit-handler'>
 				<Link to='/home/edithandler' className='btn-new'>
 					<i class='fas fa-user-edit'></i> Edit
@@ -94,15 +84,10 @@ const CurrentHandler = ({
 	);
 };
 
-CurrentHandler.prototypes = {
-	getCurrentProfile: PropTypes.func.isRequired,
-	auth: PropTypes.object.isRequired,
-	profile: PropTypes.object.isRequired,
+RenderCurrentHandler.prototype = {
+	loading: PropTypes.bool.isRequired,
+	currentProfile: PropTypes.object.isRequired,
+	handler: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-	auth: state.auth,
-	profile: state.profile,
-});
-
-export default connect(mapStateToProps, { getCurrentProfile })(CurrentHandler);
+export default RenderCurrentHandler;

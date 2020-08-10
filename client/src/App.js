@@ -1,20 +1,20 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 //Redux
 import { Provider } from 'react-redux';
-import store from './store';
-import { loadUser } from './actions/auth';
+import store from './redux/store';
+import { loadUser } from './redux';
 import setAuthToken from './utils/setAuthToken';
 
-import Login from './components/auth/Login';
+import Login from './components/auth/login/Login';
 import Header from './components/layout/Header';
 import Orders from './components/orders/Orders';
-import CurrentHandler from './components/handlers/CurrentHandler';
-import Handlers from './components/handlers/Handlers';
-import Handler from './components/handlers/Handler';
-import NewHandler from './components/handlers/NewHandler';
-import UpdateHandler from './components/handlers/UpdateHandler';
+import CurrentHandler from './components/handlers/currentHandler/CurrentHandler';
+import Handlers from './components/handlers/handlers/Handlers';
+import Handler from './components/handlers/handler/Handler';
+import NewHandler from './components/handlers/newHandler/NewHandler';
+import UpdateHandler from './components/handlers/updateHandler/UpdateHandler';
 import NotFound from './components/NotFound';
 import Alert from './components/layout/Alert';
 import PrivateRoute from './components/routing/PrivateRoute';

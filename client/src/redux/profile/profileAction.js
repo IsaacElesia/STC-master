@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setAlert } from '../alert';
+import { setAlert } from '../alert/alertActions';
 
 import {
 	GET_PROFILE,
@@ -66,23 +66,9 @@ export const getProfileById = (handlerID) => async (dispatch) => {
 };
 
 //Update handler profile
-export const updateHandlerProfile = (
-	{
-		name,
-		email,
-		role,
-		phone,
-		street,
-		apt,
-		city,
-		zip,
-		state,
-		country,
-		avatarLocation,
-		avatarId,
-	},
-	history
-) => async (dispatch) => {
+export const updateHandlerProfile = (formData = {}, history) => async (
+	dispatch
+) => {
 	try {
 		const config = {
 			headers: {
@@ -90,20 +76,7 @@ export const updateHandlerProfile = (
 			},
 		};
 
-		const body = JSON.stringify({
-			name,
-			email,
-			role,
-			phone,
-			street,
-			apt,
-			city,
-			zip,
-			state,
-			country,
-			avatarLocation,
-			avatarId,
-		});
+		const body = JSON.stringify(formData);
 
 		const res = await axios.post('/api/handler/update', body, config);
 

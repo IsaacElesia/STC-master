@@ -30,42 +30,14 @@ export const loadUser = () => async (dispatch) => {
 };
 
 // Rgister Handlers
-export const register = ({
-	name,
-	email,
-	role,
-	phone,
-	street,
-	apt,
-	city,
-	zip,
-	state,
-	country,
-	password,
-	avatarLocation,
-	avatarId,
-}) => async (dispatch) => {
+export const register = (formData = {}) => async (dispatch) => {
 	const config = {
 		headers: {
 			'Content-Type': 'application/json',
 		},
 	};
 
-	const body = JSON.stringify({
-		name,
-		email,
-		role,
-		phone,
-		street,
-		apt,
-		city,
-		zip,
-		state,
-		country,
-		password,
-		avatarLocation,
-		avatarId,
-	});
+	const body = JSON.stringify(formData);
 
 	try {
 		const res = await axios.post('/api/handler', body, config);

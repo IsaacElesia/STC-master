@@ -1,20 +1,9 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import Spinner from '../layout/Spinner';
-import { getProfileById } from '../../actions/profile';
+import Spinner from '../../layout/Spinner';
 
-const Handler = ({
-	profile: { profile, loading },
-	getProfileById,
-	auth,
-	match,
-}) => {
-	useEffect(() => {
-		getProfileById(match.params.id);
-	}, [getProfileById, match.params.id]);
-
+const RenderHandler = ({ profile, auth, loading }) => {
 	return (
 		<Fragment>
 			{profile === null || loading ? (
@@ -106,15 +95,10 @@ const Handler = ({
 	);
 };
 
-Handler.prototypes = {
-	getProfileById: PropTypes.func.isRequired,
+RenderHandler.propTypes = {
 	profile: PropTypes.object.isRequired,
 	auth: PropTypes.object.isRequired,
+	loading: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-	profile: state.profile,
-	auth: state.auth,
-});
-
-export default connect(mapStateToProps, { getProfileById })(Handler);
+export default RenderHandler;
