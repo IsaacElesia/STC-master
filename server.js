@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { PORT, NODE_ENV } = require('./config/default');
 const express = require('express');
+const cors = require('cors');
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/errorHandler');
 const ShopifyOreders = require('./shopify/orders/shopifyOrders');
@@ -12,10 +13,11 @@ const app = express();
 connectDB();
 
 //Init middleware
+app.use(cors());
 app.use(express.json({ extended: false }));
 
 // HANDLING CORS ERRORS
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', '*');
 	if (req.method === 'OPTIONS') {
@@ -23,11 +25,12 @@ app.use((req, res, next) => {
 		return res.status(200).json({});
 	}
 	next();
-});
+}); */
 
 app.get('/', (req, res) => res.send('API running'));
 
 //Define routes
+app.use('/uploads', express.static('uploads'));
 app.use('/api/image', require('./routes/api/image'));
 app.use('/api/handler', require('./routes/api/handlers'));
 app.use('/api/auth', require('./routes/api/auth'));

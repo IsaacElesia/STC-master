@@ -861,10 +861,11 @@ dd {
 .preview-img {
   max-width: 15rem;
   min-width: 10rem;
-  height: 20vh;
+  height: 60vh;
   background: center/contain no-repeat url(/img/avatars/images.jfif);
   border-radius: 3rem;
   margin: 0 0 0 2rem;
+  background-color: red;
 }
 
 #btn-pics {
@@ -1038,6 +1039,10 @@ dd {
   padding: 20;
   background: #fff;
   border-radius: 2px;
+  max-width: 80%;
+  min-width: 340px;
+  max-height: 80vh;
+  min-height: 300px;
   margin: 5% auto 0 auto;
   overflow-y: scroll;
   -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -1075,30 +1080,6 @@ dd {
   .inner {
     min-width: 310px;
   }
-}
-
-.img-cropper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 100%;
-  background-color: red;
-}
-
-.img-cropper-preview {
-  display: block;
-  max-width: 40%;
-  text-align: center;
 }
 
 html {

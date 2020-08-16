@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getProfiles } from '../../../redux';
 import RenderHandlers from './RenderHandlers';
 
-const Handlers = ({ profiles: { profiles, loading }, getProfiles }) => {
+const Handlers = ({ profile: { profiles, loading }, getProfiles }) => {
 	useEffect(() => {
 		getProfiles();
 	}, [getProfiles]);
@@ -18,7 +18,7 @@ Handlers.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-	profiles: state.profiles,
+	profile: state.profile,
 });
 
 const mapDispatchToProps = (dispatch) => {

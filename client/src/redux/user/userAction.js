@@ -1,4 +1,5 @@
 import axios from 'axios';
+import config from '../../config';
 import { setAlert } from '../alert/alertActions';
 import setAuthToken from '../../utils/setAuthToken';
 
@@ -16,7 +17,7 @@ export const loadUser = () => async (dispatch) => {
 	}
 
 	try {
-		const res = await axios.get('/api/auth');
+		const res = await axios.get(`${config.API_ENDPOINT}/api/auth`);
 
 		dispatch({
 			type: USER_LOADED,
@@ -31,7 +32,7 @@ export const loadUser = () => async (dispatch) => {
 
 // Rgister Handlers
 export const register = (formData = {}) => async (dispatch) => {
-	const config = {
+	const axiosConfig = {
 		headers: {
 			'Content-Type': 'application/json',
 		},
@@ -40,7 +41,11 @@ export const register = (formData = {}) => async (dispatch) => {
 	const body = JSON.stringify(formData);
 
 	try {
-		const res = await axios.post('/api/handler', body, config);
+		const res = await axios.post(
+			`${config.API_ENDPOINT}/api/handler`,
+			body,
+			axiosConfig
+		);
 
 		dispatch({
 			type: REGISTER_SUCCESS,

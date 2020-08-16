@@ -2,8 +2,9 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Spinner from '../../layout/Spinner';
 import { Link } from 'react-router-dom';
+import config from '../../../config';
 
-const RenderCurrentHandler = ({ loading, currentProfile, handler }) => {
+const RenderCurrentHandler = ({ loading, currentProfile }) => {
 	return loading && currentProfile === null ? (
 		<Spinner />
 	) : (
@@ -16,28 +17,28 @@ const RenderCurrentHandler = ({ loading, currentProfile, handler }) => {
 			<div class='handler-details'>
 				<img
 					src={
-						handler.avatar
-							? handler.avatar.avatarLocation
+						currentProfile.avatar
+							? `${config.API_ENDPOINT}/${currentProfile.avatar.avatarLocation}`
 							: '/img/avatars/images.jfif'
 					}
-					alt={handler && handler.name}
+					alt={currentProfile && currentProfile.name}
 				/>
 
-				<h3 class='header-3'>Hi, {handler && handler.name}</h3>
-				{handler !== null ? (
+				<h3 class='header-3'>Hi, {currentProfile && currentProfile.name}</h3>
+				{currentProfile !== null ? (
 					<Fragment>
 						<p>
-							<span className='title-span'>ID:</span> {handler._id}
+							<span className='title-span'>ID:</span> {currentProfile._id}
 						</p>
 						<p>
-							<span className='title-span'>Role:</span> {handler.role}
+							<span className='title-span'>Role:</span> {currentProfile.role}
 						</p>
 						<p>
 							<span className='title-span'>Tel:</span>
-							{handler.phone}
+							{currentProfile.phone}
 						</p>
 						<p>
-							<span className='title-span'>Email:</span> {handler.email}
+							<span className='title-span'>Email:</span> {currentProfile.email}
 						</p>
 
 						<table className='address'>
@@ -50,8 +51,8 @@ const RenderCurrentHandler = ({ loading, currentProfile, handler }) => {
 							</thead>
 							<tbody>
 								<tr>
-									<td colSpan='2'>{handler.address.street}</td>
-									<td>{handler.address.apt}</td>
+									<td colSpan='2'>{currentProfile.address.street}</td>
+									<td>{currentProfile.address.apt}</td>
 								</tr>
 							</tbody>
 							<thead>
@@ -63,9 +64,9 @@ const RenderCurrentHandler = ({ loading, currentProfile, handler }) => {
 							</thead>
 							<tbody>
 								<tr>
-									<td>{handler.address.city}</td>
-									<td>{handler.address.state}</td>
-									<td>{handler.address.zip}</td>
+									<td>{currentProfile.address.city}</td>
+									<td>{currentProfile.address.state}</td>
+									<td>{currentProfile.address.zip}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -87,7 +88,6 @@ const RenderCurrentHandler = ({ loading, currentProfile, handler }) => {
 RenderCurrentHandler.prototype = {
 	loading: PropTypes.bool.isRequired,
 	currentProfile: PropTypes.object.isRequired,
-	handler: PropTypes.object.isRequired,
 };
 
 export default RenderCurrentHandler;

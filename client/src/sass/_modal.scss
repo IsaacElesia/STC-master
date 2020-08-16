@@ -1,0 +1,47 @@
+.outer {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100vh;
+	z-index: 101;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.inner {
+	padding: 20;
+	background: #fff;
+	border-radius: 2px;
+	margin: 5% auto 0 auto;
+	overflow-y: scroll;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.close {
+	position: relative;
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+
+	i {
+		font-size: 1.2em;
+		color: #000;
+
+		&:hover {
+			cursor: pointer;
+			color: rgb(206, 9, 9);
+		}
+	}
+}
+
+@media (min-width: 900px) {
+	.inner {
+		max-width: 65%;
+	}
+}
+@media (max-width: 320px) {
+	.inner {
+		min-width: 310px;
+	}
+}

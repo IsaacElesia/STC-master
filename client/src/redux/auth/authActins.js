@@ -1,4 +1,5 @@
 import axios from 'axios';
+import config from '../../config';
 import { setAlert } from '../alert/alertActions';
 import { loadUser } from '../user/userAction';
 
@@ -6,7 +7,7 @@ import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, CLEAR_PROFILE } from './authTypes';
 
 // Login Handlers
 export const login = (email, password) => async (dispatch) => {
-	const config = {
+	const axiosConfig = {
 		headers: {
 			'Content-Type': 'application/json',
 		},
@@ -16,7 +17,11 @@ export const login = (email, password) => async (dispatch) => {
 	const body = JSON.stringify({ email, password });
 
 	try {
-		const res = await axios.post('/api/auth', body, config);
+		const res = await axios.post(
+			`${config.API_ENDPOINT}/api/auth`,
+			body,
+			axiosConfig
+		);
 
 		dispatch({
 			type: LOGIN_SUCCESS,
@@ -24,10 +29,11 @@ export const login = (email, password) => async (dispatch) => {
 		});
 		dispatch(loadUser());
 	} catch (err) {
-		const errors = err.response.data.errors;
+		console.log('err =', err);
+		const error = err;
 
-		if (errors) {
-			errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+		if (error) {
+			dispatch(setAlert(error.msg, 'danger'));
 		}
 
 		dispatch({

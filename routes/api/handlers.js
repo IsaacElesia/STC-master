@@ -4,7 +4,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
-const cloud = require('../../config/cloudinary');
 const { JWT_SECRET } = require('../../config/default');
 
 const Handler = require('../../models/Handler');
@@ -133,7 +132,7 @@ router.post(
 // @route    POST api/handler/update
 // @desc     Update handler details
 // @access   Private
-router.post(
+router.put(
 	'/update',
 	[
 		auth,
@@ -172,10 +171,10 @@ router.post(
 		// Build handler object
 		const handlerFields = {};
 		if (name) handlerFields.name = name;
-		if (email) {
+		/* 	if (email) {
 			email = email.toLowerCase();
 			handlerFields.email = email;
-		}
+		} */
 		if (role) handlerFields.role = role;
 		if (phone) handlerFields.phone = phone;
 
@@ -196,21 +195,14 @@ router.post(
 		try {
 			let handler = await Handler.findById(req.handler.id);
 
-			//Delete previous IMAGE in CLOUDINARY
-			if (handler.avatar) {
-				const result = await cloud.destroy(handler.avatar.avatarId);
-			}
-
-			console.log('still running');
-
 			if (handler) {
 				// Update
 				handler = await Handler.findOneAndUpdate(
-					{ id: req.id },
+					{ _id: req.handler.id },
 					{ $set: handlerFields },
 					{ new: true }
 				);
-
+				console.log('updated handler =', handler);
 				return res.json(handler);
 			}
 		} catch (err) {

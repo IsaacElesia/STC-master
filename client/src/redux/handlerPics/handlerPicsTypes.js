@@ -1,2 +1,3 @@
 export const IMG_UPLOAD_SUCCESS = 'IMG_UPLOAD_SUCCESS';
 export const IMG_UPLOAD_FAIL = 'IMG_UPLOAD_FAIL';
+export const IMG_LOADED = 'IMG_LOADED';

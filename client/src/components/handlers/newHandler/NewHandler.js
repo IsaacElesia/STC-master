@@ -25,10 +25,10 @@ const NewHandler = ({ image: { image }, setAlert, register }) => {
 	useEffect(() => {
 		setformData({
 			...formData,
-			avatarLocation: image.cloudImage,
+			avatarLocation: image.imageURL,
 			avatarId: image.imageId,
 		});
-	}, [image, formData]);
+	}, [image]);
 
 	const handleChange = (e) =>
 		setformData({ ...formData, [e.target.name]: e.target.value });

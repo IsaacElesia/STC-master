@@ -1,10 +1,9 @@
 import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './authTypes';
 
 const initialState = {
-	token: localStorage.getItem('token'),
+	token: null,
 	isAuthenticated: null,
 	loading: true,
-	handler: null,
 };
 
 export default function (state = initialState, action) {
@@ -13,9 +12,10 @@ export default function (state = initialState, action) {
 	switch (type) {
 		case LOGIN_SUCCESS:
 			localStorage.setItem('token', payload.token);
+
 			return {
 				...state,
-				...payload,
+				token: localStorage.getItem('token'),
 				isAuthenticated: true,
 				loading: false,
 			};

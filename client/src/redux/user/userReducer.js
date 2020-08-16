@@ -6,7 +6,7 @@ import {
 } from './userTypes';
 
 const initialState = {
-	token: localStorage.getItem('token'),
+	token: null,
 	isAuthenticated: null,
 	loading: true,
 	handler: null,
@@ -19,6 +19,7 @@ export default function (state = initialState, action) {
 		case USER_LOADED:
 			return {
 				...state,
+				token: localStorage.getItem('token'),
 				isAuthenticated: true,
 				loading: false,
 				handler: payload,

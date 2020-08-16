@@ -29,58 +29,67 @@ const UpdateHandler = ({
 
 	useEffect(() => {
 		getCurrentProfile();
+	}, []);
 
-		setformData({
-			[formData.name]:
-				loading || !currentProfile.name ? '' : currentProfile.name,
-			[formData.email]:
-				loading || !currentProfile.email ? '' : currentProfile.email,
-			[formData.role]:
-				loading || !currentProfile.role ? '' : currentProfile.role,
-			[formData.phone]:
-				loading || !currentProfile.phone ? '' : currentProfile.phone,
-			[formData.street]:
-				loading || !currentProfile.address.street
+	useEffect(() => {
+		if (currentProfile) {
+			setformData({
+				...formData,
+				name: loading || !currentProfile.name ? '' : currentProfile.name,
+				email: loading || !currentProfile.email ? '' : currentProfile.email,
+				role: loading || !currentProfile.role ? '' : currentProfile.role,
+				phone: loading || !currentProfile.phone ? '' : currentProfile.phone,
+				street: !currentProfile.address
+					? ''
+					: loading || !currentProfile.address.street
 					? ''
 					: currentProfile.address.street,
-			[formData.apt]:
-				loading || !currentProfile.address.apt
+				apt: !currentProfile.address
+					? ''
+					: loading || !currentProfile.address.apt
 					? ''
 					: currentProfile.address.apt,
-			[formData.city]:
-				loading || !currentProfile.address.city
+				city: !currentProfile.address
+					? ''
+					: loading || !currentProfile.address.city
 					? ''
 					: currentProfile.address.city,
-			[formData.zip]:
-				loading || !currentProfile.address.zip
+				zip: !currentProfile.address
+					? ''
+					: loading || !currentProfile.address.zip
 					? ''
 					: currentProfile.address.zip,
-			[formData.state]:
-				loading || !currentProfile.address.state
+				state: !currentProfile.address
+					? ''
+					: loading || !currentProfile.address.state
 					? ''
 					: currentProfile.address.state,
-			[formData.country]:
-				loading || !currentProfile.address.country
+				country: !currentProfile.address
+					? ''
+					: loading || !currentProfile.address.country
 					? ''
 					: currentProfile.address.country,
-			[formData.avatarLocation]:
-				loading || !currentProfile.avatar.avatarLocation
+				avatarLocation: !currentProfile.avatar
+					? ''
+					: loading || !currentProfile.avatar.avatarLocation
 					? ''
 					: currentProfile.avatar.avatarLocation,
-			[formData.avatarId]:
-				loading || !currentProfile.avatar.avatarId
+				avatarId: !currentProfile.avatar
+					? ''
+					: loading || !currentProfile.avatar.avatarId
 					? ''
 					: currentProfile.avatar.avatarId,
-		});
-	}, [loading, getCurrentProfile, formData, currentProfile]);
+			});
+		}
+	}, [currentProfile]);
 
 	useEffect(() => {
 		setformData({
 			...formData,
-			avatarLocation: image.cloudImage,
+			avatarLocation: image.imageURL,
 			avatarId: image.imageId,
 		});
-	}, [image, formData]);
+	}, [image]);
 
 	const handleChange = (e) =>
 		setformData({ ...formData, [e.target.name]: e.target.value });
@@ -88,6 +97,7 @@ const UpdateHandler = ({
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
+		console.log('form Data =', formData);
 		updateHandlerProfile(formData, history);
 	};
 
@@ -126,4 +136,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
 	updateHandlerProfile,
 	getCurrentProfile,
-})(withRouter(UpdateHandler));
+})(UpdateHandler);

@@ -1,0 +1,14 @@
+.img-cropper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	background-color: red;
+
+	&-preview {
+		display: block;
+		max-width: 40%;
+		text-align: center;
+	}
+}

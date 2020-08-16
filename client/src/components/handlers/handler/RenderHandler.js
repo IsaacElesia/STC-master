@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Spinner from '../../layout/Spinner';
 
-const RenderHandler = ({ profile, auth, loading }) => {
+const RenderHandler = ({ profile, auth, loading, handler }) => {
 	return (
 		<Fragment>
 			{profile === null || loading ? (
 				<Spinner />
 			) : (
-				<section class='handler scrollbar'>
+				<section className='handler scrollbar'>
 					<div className='edit-handler'>
 						{auth.isAuthenticated &&
 							auth.loading === false &&
-							auth.handler._id === profile._id && (
+							handler._id === profile._id && (
 								<Link to='/home/edithandler' className='btn-new'>
 									<i class='fas fa-user-edit'></i> Edit
 								</Link>
@@ -23,7 +23,7 @@ const RenderHandler = ({ profile, auth, loading }) => {
 							Go Back
 						</Link>
 					</div>
-					<div class='handler-details'>
+					<div className='handler-details'>
 						<img
 							src={
 								profile.avatar
@@ -33,7 +33,7 @@ const RenderHandler = ({ profile, auth, loading }) => {
 							alt={profile && profile.name}
 						/>
 
-						<h3 class='header-3'>Hi, {profile && profile.name}</h3>
+						<h3 className='header-3'>Hi, {profile && profile.name}</h3>
 						{profile !== null ? (
 							<Fragment>
 								<p>
@@ -96,8 +96,9 @@ const RenderHandler = ({ profile, auth, loading }) => {
 };
 
 RenderHandler.propTypes = {
-	profile: PropTypes.object.isRequired,
+	profile: PropTypes.object,
 	auth: PropTypes.object.isRequired,
+	handler: PropTypes.object,
 	loading: PropTypes.bool.isRequired,
 };
 

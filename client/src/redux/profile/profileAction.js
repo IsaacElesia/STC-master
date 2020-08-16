@@ -1,4 +1,5 @@
 import axios from 'axios';
+import config from '../../config';
 import { setAlert } from '../alert/alertActions';
 
 import {
@@ -14,7 +15,7 @@ import {
 // Get current handler profile
 export const getCurrentProfile = () => async (dispatch) => {
 	try {
-		const res = await axios.get('/api/handler/me');
+		const res = await axios.get(`${config.API_ENDPOINT}/api/handler/me`);
 
 		dispatch({
 			type: CURRENT_PROFILE,
@@ -24,7 +25,7 @@ export const getCurrentProfile = () => async (dispatch) => {
 		dispatch({ type: CLEAR_CURRENT_PROFILE });
 		dispatch({
 			type: PROFILE_ERROR,
-			payload: { msg: err.response.statusText, status: err.response.status },
+			payload: { msg: err.response },
 		});
 	}
 };
@@ -32,7 +33,7 @@ export const getCurrentProfile = () => async (dispatch) => {
 // Get all handlers profiles
 export const getProfiles = () => async (dispatch) => {
 	try {
-		const res = await axios.get('/api/handler');
+		const res = await axios.get(`${config.API_ENDPOINT}/api/handler`);
 
 		dispatch({
 			type: GET_PROFILES,
@@ -50,17 +51,20 @@ export const getProfiles = () => async (dispatch) => {
 // Get handler profiles By id
 export const getProfileById = (handlerID) => async (dispatch) => {
 	try {
-		const res = await axios.get(`/api/handler/${handlerID}`);
+		const res = await axios.get(
+			`${config.API_ENDPOINT}/api/handler/${handlerID}`
+		);
 
 		dispatch({
 			type: GET_PROFILE,
 			payload: res.data,
 		});
 	} catch (err) {
+		console.log('error =', err);
 		dispatch({ type: CLEAR_PROFILE });
 		dispatch({
 			type: PROFILE_ERROR,
-			payload: { msg: err.response.statusText, status: err.response.status },
+			payload: { msg: err.response },
 		});
 	}
 };
@@ -70,7 +74,7 @@ export const updateHandlerProfile = (formData = {}, history) => async (
 	dispatch
 ) => {
 	try {
-		const config = {
+		const axiosConfig = {
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -78,7 +82,11 @@ export const updateHandlerProfile = (formData = {}, history) => async (
 
 		const body = JSON.stringify(formData);
 
-		const res = await axios.post('/api/handler/update', body, config);
+		const res = await axios.put(
+			`${config.API_ENDPOINT}/api/handler/update`,
+			body,
+			axiosConfig
+		);
 
 		dispatch({
 			type: CURRENT_PROFILE,
@@ -89,7 +97,7 @@ export const updateHandlerProfile = (formData = {}, history) => async (
 
 		history.push('/home/handler');
 	} catch (err) {
-		const errors = err.response.data.errors;
+		const errors = err;
 
 		if (errors) {
 			errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));

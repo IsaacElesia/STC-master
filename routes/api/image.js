@@ -1,35 +1,31 @@
+const fs = require('fs');
+const { promisify } = require('util');
+const unlinkAsync = promisify(fs.unlink);
 const express = require('express');
 const router = express.Router();
-const cloud = require('../../config/cloudinary');
 const multer = require('../../middleware/multer');
+const auth = require('../../middleware/auth');
 
 //@route    POST api/image
 //@desc     upload handler image
 //@access   Public
-router.post('/', multer.any(), async (req, res) => {
-	try {
-		let imageDetails = {
-			imageName: req.files[0].filename,
-		};
+router.post('/', [auth, multer.single('avatar')], async (req, res) => {
+	console.log('req.files =', req.file);
 
+	try {
 		// Build image details
-		if (req.files[0]) {
-			imageDetails = {
-				imageName: req.files[0].filename,
-				cloudImage: req.files[0].path,
-				imageId: '',
+		if (req.file) {
+			const imageDetails = {
+				imageId: req.file.filename,
+				imageURL: req.file.path,
 			};
 
-			// POST THE IMAGE TO CLOUDINARY
-			const result = await cloud.uploads(imageDetails.cloudImage);
-
-			if (result) {
-				imageDetails = {
-					imageName: req.files[0].filename,
-					cloudImage: result.url,
-					imageId: result.id,
-				};
+			// Delete the previous image
+			if (req.body.previous) {
+				const path = req.body.previous;
+				await unlinkAsync(path);
 			}
+
 			return res.json(imageDetails);
 		}
 	} catch (err) {

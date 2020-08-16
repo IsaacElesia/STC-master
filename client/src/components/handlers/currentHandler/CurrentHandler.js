@@ -6,7 +6,7 @@ import RenderCurrentHandler from './RenderCurrentHandler';
 
 const CurrentHandler = ({
 	getCurrentProfile,
-	auth: { handler },
+	user: { handler },
 	profile: { currentProfile, loading },
 }) => {
 	useEffect(() => {
@@ -29,7 +29,7 @@ CurrentHandler.prototypes = {
 };
 
 const mapStateToProps = (state) => ({
-	auth: state.auth,
+	user: state.user,
 	profile: state.profile,
 });
 
